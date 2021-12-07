@@ -7,7 +7,8 @@
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.0.0"
+    "react-scripts": "^4.0.3",
+    "storybook": "^6.4.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,15 +32,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@storybook/addon-actions": "^5.0.10",
+    "@storybook/addon-actions": "^6.4.8",
     "@storybook/addon-backgrounds": "^5.0.10",
     "@storybook/addon-links": "^5.0.10",
     "@storybook/addons": "^5.0.10",
-    "@storybook/react": "^5.0.10",
-    "@testing-library/jest-dom": "^4.0.0",
-    "@testing-library/react": "^8.0.7",
-    "babel-loader": "^8.0.5",
-    "node-sass": "^4.14.0"
+    "@storybook/react": "^6.4.8",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^6.0.0"
   },
   "jest": {
     "watchPathIgnorePatterns": [
