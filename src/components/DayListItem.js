@@ -4,8 +4,8 @@ import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
   let dayClass = classNames("day-list__item", {
-    "day-list__item--selected": props.selected,
-    "day-list__item--full": props.spots === 0,
+    "--selected": props.selected,
+    "--full": !props.spots,
   });
   const formatSpots = (spots) => {
     return `${spots || "no"} spot${spots === 1 ? "" : "s"}`;
