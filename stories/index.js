@@ -151,7 +151,7 @@ storiesOf("Appointment", module)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => (
     <Show
-      student={"Bipul Chaudhary"}
+      student={"Mero Haddad"}
       interviewer={interviewer}
       onEdit={action("onEdit")}
       onDelete={action("onDelete")}
