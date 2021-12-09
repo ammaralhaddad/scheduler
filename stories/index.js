@@ -145,15 +145,9 @@ storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }],
   })
-  .add("Appointment", () => <Appointment />);
-
-storiesOf("Appointment", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }],
-  })
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
-  .add("Header", () => <Header time="12pm" />)
+  .add("Header", () => <Header time="11pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => (
     <Show
@@ -170,12 +164,10 @@ storiesOf("Appointment", module)
       onCancel={action("onCancel")}
     />
   ))
-
-  .add("Status", () => <Status message={"Deleting"} />)
-
+  .add("Status", () => <Status message={"Deleting..."} />)
   .add("Error", () => (
     <Error
-      message={"Could not delete appointment."}
+      message={"Could not delete Appointment!!!"}
       onClose={action("onClose")}
     />
   ))
@@ -183,7 +175,7 @@ storiesOf("Appointment", module)
     return (
       <Form
         student={"Rimsha Chaudhary"}
-        interviewer={3}
+        interviewer={2}
         interviewers={interviewers}
         onSave={action("onSave")}
         onCancel={action("onCancel")}
