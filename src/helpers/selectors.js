@@ -7,3 +7,14 @@ export function getAppointmentsForDay(state, day) {
   const appointmentDetails = appointmentIDs.map((id) => state.appointments[id]);
   return appointmentDetails;
 }
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+
+  const interviewerID = interview.interviewer;
+  const interviewerObject = state.interviewers[interviewerID];
+
+  return { ...interview, interviewer: interviewerObject };
+}
