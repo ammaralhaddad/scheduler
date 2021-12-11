@@ -41,8 +41,10 @@
     "@storybook/react": "^6.4.8",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^6.0.0"
+    "node-sass": "^6.0.0",
+    "react-test-renderer": "^16.9.0"
   },
   "jest": {
     "watchPathIgnorePatterns": [
