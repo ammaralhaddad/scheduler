@@ -1,33 +1,32 @@
 import React from "react";
-import "./DayListItem.scss";
 import classNames from "classnames";
+import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  const { name, spots, onChange, selected } = props;
-
-  const formatSpots = (spots) => {
+  // for displaying number of available interview spots with appropriate grammar
+  const formatSpots = function (spots) {
     if (spots === 0) {
       return "no spots remaining";
     }
 
     if (spots === 1) {
       return "1 spot remaining";
-    }
-
-    return `${spots} spots remaining`;
+    } else return `${spots} spots remaining`;
   };
 
-  const dayListItemClasses = classNames({
-    "day-list__item": true,
-    "day-list__item--selected": selected,
-    "day-list__item--full": spots === 0,
+  // add class names based on props
+  const dayClass = classNames("day-list__item", {
+    "day-list__item--selected": props.selected,
+    "day-list__item--full": props.spots === 0,
   });
-
   return (
-    <li onClick={onChange} className={dayListItemClasses}>
-      <h2 className="text--regular">{name}</h2>
-      <h3 className="text--light">{formatSpots(spots)}</h3>
+    <li
+      data-testid="day"
+      onClick={() => props.setDay(props.name)}
+      className={dayClass}
+    >
+      <h2 className="text--regular">{props.name}</h2>
+      <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
   );
 }
-
