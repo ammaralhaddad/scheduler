@@ -17,6 +17,21 @@ export default function Application(props) {
   });
 
   const setDay = (day) => setState({ ...state, day });
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState({
+      ...state,
+      appointments,
+    });
+  }
 
   useEffect(() => {
     Promise.all([
@@ -45,6 +60,7 @@ export default function Application(props) {
 
   const appointmentArray = dailyAppointments.map((appointmentItem) => {
     const interview = getInterview(state, appointmentItem.interview);
+    console.log(interview);
     return (
       <Appointment
         key={appointmentItem.id}
@@ -52,6 +68,7 @@ export default function Application(props) {
         time={appointmentItem.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
