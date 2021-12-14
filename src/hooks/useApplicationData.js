@@ -22,12 +22,16 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const day = updateSpots(state, appointments);
 
     return axios
       .put(`/api/appointments/${id}`, { interview: appointments[id].interview })
       .then(() => {
-        setState((prev) => ({ ...prev, appointments: appointments }));
-        updateSpots(state, appointments);
+        setState((prev) => ({
+          ...prev,
+          appointments: appointments,
+          days: day,
+        }));
       });
   };
 
@@ -42,11 +46,15 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const day = updateSpots(state, appointments);
     return axios
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
-        setState((prev) => ({ ...prev, appointments: appointments }));
-        updateSpots(state, appointments);
+        setState((prev) => ({
+          ...prev,
+          appointments: appointments,
+          days: day,
+        }));
       });
   }
 
