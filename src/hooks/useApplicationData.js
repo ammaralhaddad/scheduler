@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import { NULL } from "node-sass";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -28,6 +27,7 @@ export default function useApplicationData() {
       .put(`/api/appointments/${id}`, { interview: appointments[id].interview })
       .then(() => {
         setState((prev) => ({ ...prev, appointments: appointments }));
+        updateSpots(state, appointments);
       });
   };
 
@@ -46,8 +46,27 @@ export default function useApplicationData() {
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
         setState((prev) => ({ ...prev, appointments: appointments }));
+        updateSpots(state, appointments);
       });
   }
+
+  const updateSpots = (state, appointments) => {
+    const days = state.days.map((day) => {
+      const newSpot = day.appointments.reduce((prev, ID) => {
+        if (appointments[ID].interview === null) {
+          return prev + 1;
+        } else {
+          return prev;
+        }
+      }, 0);
+      if (state.day === day.name) {
+        return { ...day, spots: newSpot };
+      } else {
+        return { ...day };
+      }
+    });
+    return days;
+  };
 
   useEffect(() => {
     Promise.all([
@@ -64,5 +83,12 @@ export default function useApplicationData() {
     });
   }, []);
 
-  return { state, setState, setDay, bookInterview, cancelInterview };
+  return {
+    state,
+    setState,
+    setDay,
+    bookInterview,
+    cancelInterview,
+    updateSpots,
+  };
 }

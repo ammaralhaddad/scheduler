@@ -10,7 +10,7 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 
 export default function Appointment(props) {
-  const { bookInterview, cancelInterview } = props;
+  const { days, bookInterview, cancelInterview } = props;
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -19,6 +19,7 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
+  const EDIT = "EDIT";
 
   /// save function
   function save(name, interviewer) {
@@ -28,11 +29,14 @@ export default function Appointment(props) {
     };
 
     transition(SAVING);
-    bookInterview(props.id, interview)
+
+    props
+      .bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         transition(ERROR_SAVE, true);
       });
   }
@@ -41,7 +45,8 @@ export default function Appointment(props) {
 
   const deleteAppointment = () => {
     transition(DELETING);
-    cancelInterview(props.id)
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true));
   };
@@ -58,6 +63,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CONFIRM && (
@@ -69,6 +75,15 @@ export default function Appointment(props) {
       )}
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
       )}
