@@ -8,11 +8,7 @@ React with Webpack for front-end Axios to communicate with server Storybook, Jes
 
 # Dependencies
 
-<<<<<<< HEAD
 Testing with Cypress requires a local Cypress install (npm install cypress --save-dev).
-=======
-Testing with Cypress requires a local Cypress install (npm install -g cypress).
->>>>>>> dfed5bb4e7da8c0fe5264ef836a593af14afa646
 
 # Setup
 
