@@ -7,7 +7,7 @@ React with Webpack for front-end Axios to communicate with server Storybook, Jes
 
 Dependencies
 
-Testing with Cypress requires a global Cypress install (npm install -g cypress).
+Testing with Cypress requires a local Cypress install (npm install -g cypress).
 
 Setup
 
