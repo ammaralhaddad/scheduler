@@ -11,7 +11,10 @@ export default function Form(props) {
     setStudent("");
     setInterviewer(null);
   };
-
+  const onStudentChange = (student) => {
+    setStudent(student);
+    props.onStudentChange(student);
+  };
   const cancel = () => {
     reset();
     props.onCancel();
@@ -45,7 +48,7 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={student}
-            onChange={(e) => setStudent(e.target.value)}
+            onChange={(e) => onStudentChange(e.target.value)}
             data-testid="student-name-input"
           />
         </form>

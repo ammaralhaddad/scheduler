@@ -8,9 +8,11 @@ import useVisualMode from "hooks/useVisualMode";
 import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
+import { useState } from "react";
 
 export default function Appointment(props) {
   const { time, days, bookInterview, cancelInterview } = props;
+  const [student, setStudent] = useState();
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -70,7 +72,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
-          onCancel={back}
+          onCancel={() => back()}
           onConfirm={deleteAppointment}
         />
       )}
@@ -79,21 +81,34 @@ export default function Appointment(props) {
       {mode === EDIT && (
         <Form
           name={props.interview.student}
+          onStudentChange={setStudent}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onCancel={back}
           onSave={save}
+          onCancel={() => transition(SHOW)}
         />
       )}
       {mode === CREATE && (
-        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
+        <Form
+          interviewers={props.interviewers}
+          onStudentChange={setStudent}
+          name={student}
+          onCancel={() => back()}
+          onSave={save}
+        />
       )}
 
       {mode === ERROR_DELETE && (
-        <Error message="Request failed on Delete operation." onClose={back} />
+        <Error
+          message="Request failed on Delete operation."
+          onClose={() => back()}
+        />
       )}
       {mode === ERROR_SAVE && (
-        <Error message="Request failed on Save operation." onClose={back} />
+        <Error
+          message="Request failed on Save operation."
+          onClose={() => transition(CREATE)}
+        />
       )}
     </article>
   );
